@@ -82,17 +82,70 @@ def cuadrados_perfectos(n: int) -> list[int]:
 #7. Potencia Modular
 def potencia_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
-
     return ((a % n)*(b % n)) % n
 
 #8. Encriptación Modular
-def encriptar(mensaje, a, b):
-    pass
+def encriptar(mensaje, a, b, n):
+    # Validar que el mensaje solo contenga caracteres válidos
+    for char in mensaje:
+        if char not in CARACTERES:
+            raise ValueError(f"El carácter '{char}' no está en la lista de caracteres permitidos.")
+    
+    # Validar que a y n sean coprimos
+    if math.gcd(n, a) != 1:
+        raise ValueError(f"El coeficiente a={a} y n={n} deben ser primos relativos (mcd(n, a)=1)")
+    
+    mensaje_encriptado = ""
+    
+    # Para cada carácter del mensaje
+    for caracter in mensaje:
+        # 1. Obtener la posición x del carácter en la lista
+        x = CARACTERES.index(caracter)
+        
+        # 2. Aplicar la función de cifrado: y = (ax + b) mod n
+        y = (a * x + b) % n
+        
+        # 3. Obtener el carácter cifrado correspondiente a la posición y
+        char_cifrado = CARACTERES[y]
+        
+        # 4. Agregar el carácter cifrado al mensaje
+        mensaje_encriptado += char_cifrado
+    
+    return mensaje_encriptado
 
 
 #9. Desencriptación Modular
 def desencriptar(mensaje_encriptado, a, b, n):
-    pass
+    # Validar que el mensaje solo contenga caracteres válidos
+    for caracter in mensaje_encriptado:
+        if caracter not in CARACTERES:
+            raise ValueError(f"El carácter '{caracter}' no está en la lista de caracteres permitidos.")
+    
+    # Validar que n y a sean primos relativos y obtener el inverso modular de a
+    a_inv = inverso_modular(a, n)
+    if a_inv is None:
+        raise ValueError(f"El coeficiente a={a} y n={n} deben ser primos relativos (mcd(n, a)=1)")
+    
+    mensaje_desencriptado = ""
+    
+    # Para cada carácter del mensaje encriptado
+    for caracter in mensaje_encriptado:
+        # 1. Obtener la posición y del carácter cifrado en la lista
+        y = CARACTERES.index(caracter)
+        
+        # 2. Aplicar la función de descifrado: x = a^(-1)(y - b) mod n
+        # Primero (y - b) mod n para asegurar que el resultado sea positivo
+        y_menos_b = (y - b) % n
+        # Luego multiplicar por el inverso modular de a
+        x = (a_inv * y_menos_b) % n
+        
+        # 3. Obtener el carácter original correspondiente a la posición x
+        char_original = CARACTERES[x]
+        
+        # 4. Agregar el carácter original al mensaje
+        mensaje_desencriptado += char_original
+    
+    return mensaje_desencriptado
 
 
 # ============================================
