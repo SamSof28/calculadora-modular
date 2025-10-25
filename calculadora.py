@@ -135,7 +135,7 @@ def desencriptar(mensaje_encriptado, a, b, n):
         
         # 2. Aplicar la función de descifrado: x = a^(-1)(y - b) mod n
         # Primero (y - b) mod n para asegurar que el resultado sea positivo
-        y_menos_b = (y - b) % n
+        y_menos_b = (y - b)
         # Luego multiplicar por el inverso modular de a
         x = (a_inv * y_menos_b) % n
         
