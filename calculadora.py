@@ -8,28 +8,28 @@ import math
 CARACTERES = "abcdefghijklmnopqrstuvwxyzáéíóúü !?ABCDEFGHIJKLMNOPQRSTUVWXYZÁÉÍÓÚÜ"
 
 
-def validar_modulo(n):
+def validar_modulo(n: int):
     if n <= 1:
         raise ValueError("El módulo n debe ser mayor que 1.")
     return True
 
-def validar_elemento_zn(a, n):
+def validar_elemento_zn(a: int, n: int):
     if a < 0 or a >= n:
         raise ValueError(f"El número {a} no está en Z_{n}. Debe estar entre 0 y {n-1}.")
     return True
 
 #1. Suma Modular
-def suma_modular(a, b, n):
+def suma_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
     return (a + b) % n
 
 #2. Producto Modular
-def producto_modular(a, b, n):
+def producto_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
     return (a * b) % n
 
 #3. Inverso Modular
-def inverso_modular(a, n):
+def inverso_modular(a: int, n: int) -> int:
     validar_modulo(n)
     a = a % n
     
@@ -42,7 +42,7 @@ def inverso_modular(a, n):
     return None
 
 #4. División Modular
-def division_modular(a, b, n):
+def division_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
     inverso_b = inverso_modular(b, n)
     if inverso_b is None:
@@ -50,7 +50,7 @@ def division_modular(a, b, n):
     return (a * inverso_b) % n
 
 #5. Raíces Cuadradas Modulares
-def raices_cuadradas(a, n):
+def raices_cuadradas(a: int, n: int) -> list[int]:
     validar_modulo(n)
     a = a % n
     soluciones = []
@@ -60,7 +60,7 @@ def raices_cuadradas(a, n):
     return soluciones
 
 #6. Cuadrados Perfectos en Zn
-def cuadrados_perfectos(n):
+def cuadrados_perfectos(n: int) -> list[int]:
     validar_modulo(n)
     cuadrados = []
 
@@ -80,11 +80,20 @@ def cuadrados_perfectos(n):
     return cuadrados
 
 #7. Potencia Modular
+def potencia_modular(a: int, b: int, n: int) -> int:
+    validar_modulo(n)
+
+    return ((a % n)*(b % n)) % n
 
 #8. Encriptación Modular
+def encriptar(mensaje, a, b):
+    pass
 
 
 #9. Desencriptación Modular
+def desencriptar(mensaje_encriptado, a, b, n):
+    pass
+
 
 # ============================================
 # MENÚ PRINCIPAL
