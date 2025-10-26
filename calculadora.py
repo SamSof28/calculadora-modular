@@ -46,7 +46,7 @@ def division_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
     inverso_b = inverso_modular(b, n)
     if inverso_b is None:
-        raise ValueError(f"No existe inverso modular para {b} en Z_{n}. gcd({b}, {n}) = {math.gcd(b, n)} ≠ 1")
+        raise ValueError(f"No existe inverso modular para {b} en Z_{n}. gcd({b}, {n}) = {math.gcd(b, n)} != 1")
     return (a * inverso_b) % n
 
 #5. Raíces Cuadradas Modulares
@@ -81,8 +81,27 @@ def cuadrados_perfectos(n: int) -> list[int]:
 
 #7. Potencia Modular
 def potencia_modular(a: int, b: int, n: int) -> int:
+    """
+    Calcula (a^b) mod n
+    a: base
+    b: exponente
+    n: módulo
+    """
     validar_modulo(n)
-    return ((a % n)*(b % n)) % n
+    
+    # Si el exponente es 0, el resultado siempre es 1
+    if b == 0:
+        return 1
+    
+    # Reducir la base al módulo
+    a = a % n
+    resultado = 1
+    
+    # Calcular a^b mod n de forma simple (para principiantes)
+    for i in range(b):
+        resultado = (resultado * a) % n
+    
+    return resultado
 
 #8. Encriptación Modular
 def encriptar(mensaje, a, b, n):
