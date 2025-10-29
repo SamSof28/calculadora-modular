@@ -13,11 +13,6 @@ def validar_modulo(n: int):
         raise ValueError("El módulo n debe ser mayor que 1.")
     return True
 
-def validar_elemento_zn(a: int, n: int):
-    if a < 0 or a >= n:
-        raise ValueError(f"El número {a} no está en Z_{n}. Debe estar entre 0 y {n-1}.")
-    return True
-
 #1. Suma Modular
 def suma_modular(a: int, b: int, n: int) -> int:
     validar_modulo(n)
