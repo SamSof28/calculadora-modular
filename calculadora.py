@@ -26,7 +26,6 @@ def producto_modular(a: int, b: int, n: int) -> int:
 #3. Inverso Modular
 def inverso_modular(a: int, n: int) -> int:
     validar_modulo(n)
-    a = a % n
     
     if math.gcd(a, n) != 1:
         return None
@@ -47,7 +46,7 @@ def division_modular(a: int, b: int, n: int) -> int:
 #5. Raíces Cuadradas Modulares
 def raices_cuadradas(a: int, n: int) -> list[int]:
     validar_modulo(n)
-    a = a % n
+    
     soluciones = []
     for r in range(n):
         if (r * r) % n == a:
