@@ -70,38 +70,14 @@ def cuadrados_perfectos(n: int) -> list[int]:
         if cuadrado not in cuadrados:
             cuadrados.append(cuadrado)
 
-    for i in range(len(cuadrados)):
-        for j in range(i + 1, len(cuadrados)):
-            if cuadrados[i] > cuadrados[j]:
-                temp = cuadrados[i]
-                cuadrados[i] = cuadrados[j]
-                cuadrados[j] = temp
-    
-    return cuadrados
+    return sorted(cuadrados)
 
 #7. Potencia Modular
 def potencia_modular(a: int, b: int, n: int) -> int:
-    """
-    Calcula (a^b) mod n
-    a: base
-    b: exponente
-    n: módulo
-    """
     validar_modulo(n)
-    
-    # Si el exponente es 0, el resultado siempre es 1
-    if b == 0:
-        return 1
-    
-    # Reducir la base al módulo
-    a = a % n
-    resultado = 1
-    
-    # Calcular a^b mod n de forma simple (para principiantes)
-    for i in range(b):
-        resultado = (resultado * a) % n
-    
+    resultado = (a**b) % n
     return resultado
+
 
 #8. Encriptación Modular
 def encriptar(mensaje, a, b, n):
